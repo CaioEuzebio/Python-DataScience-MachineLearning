@@ -11,6 +11,7 @@ df6 = pd.read_csv('lines.csv', encoding='latin-1', low_memory=False)
 df15 = df6.groupby(['Order No']).last()
 df16 = df6.groupby(['Order No']).sum()
 
+
 df1.index=df1['Order No']
 
 df3 = df1.assign(col=df1.groupby(level=0).PartNo.cumcount()).pivot(columns='col', values='PartNo')
@@ -40,4 +41,11 @@ df67 = pd.merge(df67, df15[['Order No','Carrier']], on='Order No', how='right')
 df67 = pd.merge(df67, df15[['Order No','Carrier Sort']], on='Order No', how='right')
 df67 = pd.merge(df67, df15[['Order No','Type Desc']], on='Order No', how='right')
 
-df67.to_csv('Gerar DNs.csf', index=False)
+df71 = df6[['Order No','PickNO']]
+#df71.reset_index(inplace=True)
+df72 = df71.groupby(['Order No']).last()
+df72.reset_index(inplace=True)
+
+df67 = pd.merge(df67, df72[['Order No','PickNO']], on='Order No', how='right')
+
+df67.to_csv('Gerar DNs.csv', index=False)
