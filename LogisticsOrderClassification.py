@@ -38,5 +38,6 @@ df67 = pd.merge(df67, df16[['Order No','Qty']], on='Order No', how='right')
 df67 = pd.merge(df67, df15[['Order No','transport mode']], on='Order No', how='right')
 df67 = pd.merge(df67, df15[['Order No','Carrier']], on='Order No', how='right')
 df67 = pd.merge(df67, df15[['Order No','Carrier Sort']], on='Order No', how='right')
+df67 = pd.merge(df67, df15[['Order No','Type Desc']], on='Order No', how='right')
 
 df67.to_csv('Gerar DNs.csf', index=False)
