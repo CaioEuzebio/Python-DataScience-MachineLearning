@@ -38,11 +38,38 @@ df5['Product Category'] = df5['Product Category'].str.upper()
 
 app = dash.Dash()
 app.layout = html.Div([
-    html.H1(children = "Dashboard Para Gestão De Produção - Caio",
+    html.H1(children = "Dashboard Para Gestão De Produção",
     style = {'textAlign' : 'center',}),
         html.Div(children = "_______________________________",
                  style = {'textAlign' : 'center',}),
-        
+
+    
+html.Div([
+    
+dash_table.DataTable(
+    id='table',
+    columns=[{"name": i, "id": i} for i in df2.columns],
+     data=df2.to_dict('records'),
+    #table_style={'padding-left': '10%','padding-right': '10%'},
+     style_as_list_view=False,
+    style_cell={'padding': '5px','fontSize': 20},
+    style_header={
+        'backgroundColor': 'white',
+        'fontWeight': 'bold',
+        'fontSize': 20},
+     
+     
+),
+    
+    ],style={'textAlign': 'center',
+             'align-items': 'center',
+             'fontSize': 15,
+             'width': '100%',
+             'display': 'flex',
+             'align-items': 'center',
+             'justify-content': 'center'}),
+    
+    
     dcc.Graph(
         id = 'lines-chart',
         figure = {
@@ -57,6 +84,10 @@ app.layout = html.Div([
             }
         }
     ),
+    
+   
+    
+    
     
     dcc.Graph(
         id = 'linehart',
@@ -126,7 +157,9 @@ app.layout = html.Div([
                 'title': 'CutOff Progress'
             }
         }
-    )
+    ),
+    
+   
     
 ])
 
